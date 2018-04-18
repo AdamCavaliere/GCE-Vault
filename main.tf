@@ -1,6 +1,8 @@
 provider "google" {
-  project = "VaultExample-AutoBuild"
+  project = "vaultexample-autobuild"
   region  = "us-central1"
+
+  #credentials = "${base64decode("${data.vault_generic_secret.service_account.data["private_key_data"]}")}"
 }
 
 resource "google_compute_instance" "default" {
@@ -37,3 +39,11 @@ resource "google_compute_instance" "default" {
     scopes = ["userinfo-email", "compute-ro", "storage-ro"]
   }
 }
+
+#provider "vault" {}
+
+
+#data "vault_generic_secret" "service_account" {
+#  path = "gcp/key/terraform"
+#}
+
