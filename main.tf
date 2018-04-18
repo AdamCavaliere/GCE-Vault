@@ -1,5 +1,5 @@
 provider "google" {
-  project = "VauleExample-AutoBuild"
+  project = "VaultExample-AutoBuild"
   region  = "us-central1"
 }
 
