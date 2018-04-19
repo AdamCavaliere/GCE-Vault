@@ -2,7 +2,7 @@ provider "google" {
   project = "vaultexample-autobuild"
   region  = "us-central1"
 
-  #credentials = "${base64decode("${data.vault_generic_secret.service_account.data["private_key_data"]}")}"
+  credentials = "${base64decode("${data.vault_generic_secret.service_account.data["private_key_data"]}")}"
 }
 
 resource "google_compute_instance" "default" {
@@ -14,7 +14,7 @@ resource "google_compute_instance" "default" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-8"
+      image = "ubuntu-1710-artful-v20180405"
     }
   }
 
@@ -40,10 +40,8 @@ resource "google_compute_instance" "default" {
   }
 }
 
-#provider "vault" {}
+provider "vault" {}
 
-
-#data "vault_generic_secret" "service_account" {
-#  path = "gcp/key/terraform"
-#}
-
+data "vault_generic_secret" "service_account" {
+  path = "gcp/key/terraform"
+}
